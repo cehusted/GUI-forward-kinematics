@@ -9,7 +9,6 @@ from gui_2d_kinematics import Ui_MainWindow
 
 # 'equation' uses: Xo = R(a0)[L1;0] + R(a0)R(a1)[L2;0] + R(a0)R(a1)R(a2)[L3;0] + ...
 lengths = [140, 100, 70]; angles = [60, 45, -80]
-points = [(1,3), (1,3), (1,3)]
 PRECISION = 4
 THRESH = 1e-3
 
