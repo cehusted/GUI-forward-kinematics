@@ -1,8 +1,3 @@
-###########################################################################
-# Covert .ui file to .py
-#    pyside2-uic "C:\Users\LR Admin\QtProjects\ui_rot2d\mainwindow.ui" -o "C:\Users\LR Admin\PycharmProjects\qt_stuff\gui_2d_kinematics.py"
-###########################################################################
-
 import numpy as np
 import math
 import sys
@@ -12,11 +7,7 @@ from PySide2.QtCore import QLineF, Qt, QPoint, Slot
 from PySide2.QtGui import QBrush, QPixmap, QPen, QPainter, QPaintDevice, QColor
 from gui_2d_kinematics import Ui_MainWindow
 
-'''
-'points' uses angles[1:] and defines points in each coordinate frame
-'lengths' uses angles[] and each each coordinate frame will have point (lengths[i], 0)
-'equation' uses: Xo = R(a0)[L1;0] + R(a0)R(a1)[L2;0] + R(a0)R(a1)R(a2)[L3;0] + ...
-'''
+# 'equation' uses: Xo = R(a0)[L1;0] + R(a0)R(a1)[L2;0] + R(a0)R(a1)R(a2)[L3;0] + ...
 lengths = [140, 100, 70]; angles = [60, 45, -80]
 points = [(1,3), (1,3), (1,3)]
 PRECISION = 4
@@ -52,15 +43,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.textEdit.textChanged.connect(self.length1)
         self.textEdit_2.textChanged.connect(self.length2)
         self.textEdit_3.textChanged.connect(self.length3)
-    '''
-    def paintEvent(self, event):
-        painter = QPainter()
-        painter.begin(self)
-        painter.setPen(QPen(Qt.green, 3))
-        painter.setPen(QColor(0, 0, 255))
-        painter.drawEllipse(QPoint(100, 100), 60, 60)
-        painter.end()
-    '''
+        
     def draw_2d(self):
         self.graphicsScene.clear()
         point, line = [], []
@@ -105,41 +88,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         lengths[2] = float(self.textEdit_3.toPlainText())
         self.draw_2d()
 
-def by_points():
-    result = np.eye(3)
-    for point, angle in zip(points[:-1], angles[1:]):
-        tmp = np.array([
-            [math.cos(np.deg2rad(angle)), -math.sin(np.deg2rad(angle)), point[0]],
-            [math.sin(np.deg2rad(angle)), math.cos(np.deg2rad(angle)), point[1]],
-            [0, 0, 1]
-        ])
-        result = result @ tmp
-        result[np.abs(result) < THRESH] = 0
-
-    tmp = np.array([[1, 0, points[-1][0]], [0, 1, points[-1][1]], [0, 0, 1]])
-    return result @ tmp
-
-def by_lengths():
-    result = np.array([
-        [math.cos(np.deg2rad(angles[0])), -math.sin(np.deg2rad(angles[0])), 0],
-        [math.sin(np.deg2rad(angles[0])), math.cos(np.deg2rad(angles[0])), 0],
-        [0, 0, 1]
-    ])
-    idx = 0
-    for length, angle in zip(lengths[:-1], angles[1:]):
-        idx += 1
-        tmp = np.array([
-            [math.cos(np.deg2rad(angle)), -math.sin(np.deg2rad(angle)), length],
-            [math.sin(np.deg2rad(angle)), math.cos(np.deg2rad(angle)), 0],
-            [0, 0, 1]
-        ])
-        result = result @ tmp
-        result[np.abs(result) < THRESH] = 0
-        #print("Point", idx, ": [", result[0][2], ",", result[1][2], "]")
-
-    tmp = np.array([[1, 0, length], [0, 1, 0], [0, 0, 1]])
-    return result @ tmp
-
 def by_equation():
     end_effector = np.zeros((2, len(lengths)))
     for i in range(len(lengths), 0, -1):
@@ -154,15 +102,6 @@ def rot(angle):
         [math.cos(np.deg2rad(angle)), -math.sin(np.deg2rad(angle))],
         [math.sin(np.deg2rad(angle)), math.cos(np.deg2rad(angle))]
     ])
-
-def print_points():
-    po = by_points()
-    le = by_lengths()
-    eq = by_equation()
-    print("End effector by_points is:   [", po[0][2], ",", po[1][2], "]")
-    print("End effector by_lengths is:  [", le[0][2], ",", le[1][2], "]")
-    print("End effector by_equation is: [", np.sum(eq[0]), ",", np.sum(eq[1]), "]")
-    print("-----------------------------------------------------------------------")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
