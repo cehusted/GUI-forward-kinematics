@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'C:\Users\LR Admin\QtProjects\ui_rot2d\mainwindow.ui',
-# licensing of 'C:\Users\LR Admin\QtProjects\ui_rot2d\mainwindow.ui' applies.
-#
-# Created: Wed May 29 11:03:57 2019
-#      by: pyside2-uic  running on PySide2 5.12.3
-#
-# WARNING! All changes made in this file will be lost!
-
 from PySide2 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
@@ -224,7 +214,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.graphicsView_2 = QtWidgets.QGraphicsView(self.centralWidget)
         self.graphicsView_2.setGeometry(QtCore.QRect(60, 330, 131, 131))
-        self.graphicsView_2.setStyleSheet("background-image: url(C:/Users/LR Admin/QtProjects/ui_rot2d/images/LibertyLogo.png);\n"
+        self.graphicsView_2.setStyleSheet("background-image: url(<PATH_TO_IMAGE_HERE>);\n"
 "background-color: transparent;\n"
 "border: transparent;\n"
 "")
