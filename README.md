@@ -11,6 +11,8 @@ Window displaying the "robot" is updated in real-time.
 
 Location point of the end effector is also displayed in real-time
 
+![Screenshot of GUI](https://raw.githubusercontent.com/cehusted/GUI-forward-kinematics/master/screenshot.png)
+
 ### To get this running:
 * Download both .py files, put in same directory
 * pip install the Pyside2 package
