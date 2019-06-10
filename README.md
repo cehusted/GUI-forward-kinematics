@@ -15,5 +15,5 @@ Location point of the end effector is also displayed in real-time
 
 ### To get this running:
 * Download both .py files, put in same directory
-* pip install the Pyside2 package
+* pip install the PySide2 package
 * Open command prompt to directory, type "python rot2d.py"
