@@ -11,9 +11,9 @@ Window displaying the "robot" is updated in real-time.
 
 Location point of the end effector is also displayed in real-time
 
-![Screenshot of GUI](https://raw.githubusercontent.com/cehusted/GUI-forward-kinematics/master/screenshot.png)
+![Screenshot of GUI](https://raw.githubusercontent.com/cehusted/GUI-forward-kinematics/master/screenshot.PNG)
 
 ### To get this running:
 * Download both .py files, put in same directory
 * pip install the Pyside2 package
-* In the GUI file, remove or change line 217 so it's pointing to valid image
+* Open command prompt to directory, type "python rot2d.py"
