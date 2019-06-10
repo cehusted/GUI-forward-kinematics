@@ -214,8 +214,7 @@ class Ui_MainWindow(object):
         self.label_5.setObjectName("label_5")
         self.graphicsView_2 = QtWidgets.QGraphicsView(self.centralWidget)
         self.graphicsView_2.setGeometry(QtCore.QRect(60, 330, 131, 131))
-        self.graphicsView_2.setStyleSheet("background-image: url(<PATH_TO_IMAGE_HERE>);\n"
-"background-color: transparent;\n"
+        self.graphicsView_2.setStyleSheet("background-color: transparent;\n"
 "border: transparent;\n"
 "")
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
